@@ -1,0 +1,25 @@
+{
+    "app": {
+        "header": {
+            "title": "Rob Kennedy",
+            "nav": {
+                "challenge": "Challenge",
+                "about": "About"
+            }
+        },
+        "common": {
+            "error": "Error",
+            "loading": "Loading...",
+            "success": "Success!"
+        }
+    },
+    "challenge": {
+        "search": {
+            "button": "Search",
+            "label": "Enter Search Term"
+        }
+    },
+    "about": {
+        "description": "About this challenge"
+    }
+}
