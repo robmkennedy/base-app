@@ -1,6 +1,6 @@
 import { Group } from '@mantine/core';
 import { HeaderLink } from '@common/components/Header/HeaderNav/HeaderLink/HeaderLink';
-import { aboutIcon, challengeIcon } from '@assets/images/icons';
+import { aboutIcon, challengeIcon, searchIcon } from '@assets/images/icons';
 import { useTranslation } from 'react-i18next';
 
 export function HeaderNav() {
@@ -9,6 +9,7 @@ export function HeaderNav() {
     return (
         <Group gap='md' visibleFrom='sm'>
             <HeaderLink to={'challenge'} icon={challengeIcon} label={t('app.header.nav.challenge')} />
+            <HeaderLink to={'search'} icon={searchIcon} label={t('app.header.nav.search')} />
             <HeaderLink to={'about'} icon={aboutIcon} label={t('app.header.nav.about')} />
         </Group>
     );

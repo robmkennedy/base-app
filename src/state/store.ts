@@ -1,10 +1,10 @@
 import { create } from 'zustand';
-import { type ChallengeSlice, createChallengeSlice } from '@features/challenge/state/challengeSlice';
+import { type SearchSlice, createSearchSlice } from '@features/search/state/searchSlice';
 
 // Build an overall Store type
-type GlobalStore = ChallengeSlice;
+type GlobalStore = SearchSlice;
 
 // Actually create the store from multiple slices
 export const useGlobalStore = create<GlobalStore>()((...args) => ({
-    ...createChallengeSlice(...args)
+    ...createSearchSlice(...args)
 }));

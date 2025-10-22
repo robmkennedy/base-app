@@ -1,6 +1,7 @@
 import { createBrowserRouter, Navigate } from 'react-router';
 import { App } from '@common/components/App/App';
 import { AboutPage } from '@features/about/components/AboutPage/AboutPage';
+import { SearchPage } from '@features/search/components/SearchPage/SearchPage';
 import { ChallengePage } from '@features/challenge/components/ChallengePage/ChallengePage';
 
 export const router = createBrowserRouter(
@@ -11,6 +12,7 @@ export const router = createBrowserRouter(
             children: [
                 { index: true, element: <Navigate to='/challenge' /> },
                 { path: '/about', Component: AboutPage },
+                { path: '/search', Component: SearchPage },
                 { path: '/challenge', Component: ChallengePage },
                 { path: '/*', element: <Navigate to='/challenge' /> }
             ]

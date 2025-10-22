@@ -4,20 +4,23 @@
             "title": "Rob Kennedy",
             "nav": {
                 "challenge": "Challenge",
+                "search": "Search",
                 "about": "About"
             }
         },
         "common": {
             "error": "Error",
             "loading": "Loading...",
-            "success": "Success!"
+            "success": "Success!",
+            "empty": "None found :("
         }
     },
+    "search": {
+        "button": "Search",
+        "label": "Enter Search Term"
+    },
     "challenge": {
-        "search": {
-            "button": "Search",
-            "label": "Enter Search Term"
-        }
+
     },
     "about": {
         "description": "About this challenge"

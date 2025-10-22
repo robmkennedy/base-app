@@ -1,10 +1,21 @@
-import { afterEach, vi } from 'vitest';
 import { cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/vitest';
+import { server } from './node.js';
+
+// Start MSW before all tests
+beforeAll(() => {
+    server.listen();
+});
 
 // Runs a clean after each test case (e.g. clearing jsdom)
 afterEach(() => {
     cleanup();
+    server.resetHandlers();
+});
+
+// Stop MSW after all tests
+afterAll(() => {
+    server.close()
 });
 
 // Mock matchMedia and ResizeObserver APIs as they are required by mantine but not in jsdom
