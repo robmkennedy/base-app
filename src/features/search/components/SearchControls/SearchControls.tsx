@@ -1,14 +1,18 @@
 import { type ChangeEvent, type ReactNode, useState } from 'react';
 import { Button, Flex, Group, Text, TextInput } from '@mantine/core';
-import { useSearchQuery } from '@features/search/api/useSearchQuery';
+import { termSearched } from '@features/search/state/searchSlice';
+import { useGetSearchResultsQuery } from '@features/search/state/searchApiSlice';
+import { useAppSelector } from '@common/hooks/useAppSelector';
+import { useAppDispatch } from '@common/hooks/useAppDispatch';
 import { useTranslation } from 'react-i18next';
 
 /**
  */
 export function SearchControls() {
     const [inputValue, setInputValue] = useState<string>('');
-    const [searchTerm, setSearchTerm] = useState<string>('');
-    const { data, isSuccess, isPending, isError } = useSearchQuery({ searchTerm });
+    const searchTerm = useAppSelector((state) => state.search.searchTerm);
+    const { data, isSuccess, isLoading, isError } = useGetSearchResultsQuery(searchTerm, { skip: !searchTerm });
+    const dispatch = useAppDispatch();
     const { t } = useTranslation();
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -16,7 +20,7 @@ export function SearchControls() {
     };
 
     const handleSearch = () => {
-        setSearchTerm(inputValue);
+        dispatch(termSearched(inputValue));
     };
 
     let status: string | null = null;
@@ -27,15 +31,14 @@ export function SearchControls() {
         status = t('app.common.error');
     } // ok
     else if (searchTerm) {
-        status = isPending ? t('app.common.loading') : isSuccess ? t('app.common.success') : null;
+        status = isLoading ? t('app.common.loading') : isSuccess ? t('app.common.success') : null;
 
         if (data) {
             if (data.length === 0) {
                 dataList = <Text>{t('app.common.empty')}</Text>;
-            }
-            else {
+            } else {
                 dataList = data.map((item) => {
-                   return <Text>{`${item.fullName} (${item.birthdate})`}</Text>;
+                    return <Text>{`${item.fullName} (${item.birthdate})`}</Text>;
                 });
             }
         }
@@ -46,7 +49,9 @@ export function SearchControls() {
             <Group>
                 <Text>{t('search.label')}</Text>
                 <TextInput onChange={handleChange} value={inputValue} />
-                <Button onClick={handleSearch}>{t('search.button')}</Button>
+                <Button onClick={handleSearch} disabled={!inputValue}>
+                    {t('search.button')}
+                </Button>
             </Group>
             <Flex direction='column' gap='lg'>
                 {status && <Text>{status}</Text>}
